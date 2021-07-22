@@ -14,8 +14,13 @@
 
 package main
 
-import "github.com/ossf/scorecard/cmd"
+import (
+	"log"
+
+	"github.com/ossf/scorecard/cmd"
+)
 
 func main() {
+	log.Println("test")
 	cmd.Execute()
 }
