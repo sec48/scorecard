@@ -29,6 +29,18 @@ jobs:
         uses: actions/setup-go@37335c7bb261b353407cff977110895fa0b4f7d8 # v2.1.3
         with:
           go-version: '^1.16'
+      - name: Build protobuf library
+        run: |
+              git clone https://github.com/protocolbuffers/protobuf.git
+              cd protobuf
+              git submodule update --init --recursive
+              ./autogen.sh
+              ./autogen.sh  # run autogen twice, see below
+              ./configure
+              make
+              make check
+              sudo make install
+              sudo ldconfig
       - name: Run presubmit tests
         run: |
               go env -w GOFLAGS=-mod=mod
